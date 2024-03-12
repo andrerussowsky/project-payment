@@ -13,7 +13,7 @@ This project consists of an online payment platform API and a bank simulator to 
 
 2. Navigate to the project directory.
 
-3. If you're using Docker, you can start a MongoDB instance using the following command:
+3. Start a MongoDB instance using the following command:
 
 ```bash
 docker build -t my-mongo .
@@ -65,16 +65,16 @@ You can test the online payment platform API by making requests to the above end
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"username":"john","password":"doe"}' http://localhost:3000/login
 ```
-Use a valid token
+Replace $BEARER with a valid token.
 ```bash
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNzEwNTM0MjA4LCJuYW1lIjoiSm9obiBEb2UifQ.4WyIxrq1eztMtGk8KgKHunGMrvgNTNur-56C7NdqJLc" -d '{"merchant_id":"66d16a2a-2959-45c0-894d-11b639e7e4d1","amount":10.5,"card_number":"4111111111111111","card_expiry":"042026","cvv":"333"}' http://localhost:3000/process_payment
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $BEARER" -d '{"merchant_id":"66d16a2a-2959-45c0-894d-11b639e7e4d1","amount":10.5,"card_number":"4111111111111111","card_expiry":"042026","cvv":"333"}' http://localhost:3000/process_payment
 ```
-Use a valid token and a valid transaction_id
+Replace $BEARER with a valid token and $TRANSACTION_ID with a valid transaction id.
 ```bash
-curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNzEwNTM0MjA4LCJuYW1lIjoiSm9obiBEb2UifQ.4WyIxrq1eztMtGk8KgKHunGMrvgNTNur-56C7NdqJLc" http://localhost:3000/get_payment_details/c61a266a-0b2c-4a4c-88b4-19e95d5ed61d
+curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer $BEARER" http://localhost:3000/get_payment_details/$TRANSACTION_ID
 ```
 
-Use a valid token and a valid transaction_id
+Replace $BEARER with a valid token and $TRANSACTION_ID with a valid transaction id.
 ```bash
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6dHJ1ZSwiZXhwIjoxNzEwNTM0MjA4LCJuYW1lIjoiSm9obiBEb2UifQ.4WyIxrq1eztMtGk8KgKHunGMrvgNTNur-56C7NdqJLc" -d '{"transaction_id":"c61a266a-0b2c-4a4c-88b4-19e95d5ed61d"}' http://localhost:3000/refund_payment
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $BEARER" -d '{"transaction_id":"$TRANSACTION_ID"}' http://localhost:3000/refund_payment
 ```
