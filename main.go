@@ -24,7 +24,7 @@ func main() {
     }
 
     // Set collections
-    collection := client.Database("test")
+    collection := client.Database("payment")
 
     // Create a new Fiber instance
     app := fiber.New()
